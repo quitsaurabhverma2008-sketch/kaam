@@ -1,5 +1,5 @@
 /* Kaam service worker — offline-first app shell */
-const CACHE = 'kaam-v1.0.0';
+const CACHE = 'kaam-v1.0.1';
 const ASSETS = [
   './',
   './index.html',
