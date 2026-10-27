@@ -50,4 +50,7 @@ gh run list / gh api repos/.../pages   # deploy status
 ```
 
 ## 7. Session log
-- 2026-10-27: Project created, full app built, tested, deployed. Backup repo `agent-brain` also created.
+- 2026-10-27: Project created, full app built, tested (28/28), deployed to GitHub Pages.
+- 2026-10-27: Live assets verified (HTTP 200), repo topics added, memory + learnings updated.
+- 2026-10-27: Backup repo `agent-brain` created (private) with secret-scan sync script.
+- Next session: read this file first, then `cd ~/projects/kaam && npm test`.

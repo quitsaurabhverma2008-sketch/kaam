@@ -182,3 +182,26 @@ test('persisted tasks load on next boot', () => {
   assert.equal(items.length, 1);
   assert.equal(items[0].querySelector('.task__title').textContent, 'Saved task');
 });
+
+test('import: replaces tasks from a JSON backup file', async () => {
+  const { window } = boot();
+  const doc = window.document;
+  addTask(window, 'Old task');
+
+  const backup = JSON.stringify({
+    app: 'kaam', version: 1,
+    tasks: [{ title: 'Imported task', priority: 'high', dueDate: null }]
+  });
+  const file = new window.File([backup], 'kaam-backup.json', { type: 'application/json' });
+  const input = doc.getElementById('importFile');
+  Object.defineProperty(input, 'files', { value: [file], configurable: true });
+  input.dispatchEvent(new window.Event('change', { bubbles: true }));
+
+  await new Promise((resolve) => setTimeout(resolve, 120));
+
+  const tasks = window.__kaamUI.getTasks();
+  assert.equal(tasks.length, 1);
+  assert.equal(tasks[0].title, 'Imported task');
+  assert.equal(tasks[0].priority, 'high');
+  assert.match(doc.getElementById('toastMsg').textContent, /Import ho gaya/);
+});
